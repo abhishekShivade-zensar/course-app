@@ -1,8 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { compose,applyMiddleware,createStore } from '@reduxjs/toolkit';
+import { courseReducer } from './courses/courses.reducer';
+import thunk from 'redux-thunk';
 
-export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
-});
+const middlewares=[thunk]
+const composedEnhancer=compose(applyMiddleware(...middlewares))
+
+const initalState = {
+
+}
+
+export const store = createStore(courseReducer,undefined,composedEnhancer);
